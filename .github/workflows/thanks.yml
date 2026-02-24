@@ -15,7 +15,7 @@ jobs:
                 github-token: ${{secrets.GITHUB_TOKEN}}
                 script: |
                     const issue_number=context.issue.number || 2;
-                    console.log(`issue_number: $issue_number`);
+                    console.log(`issue_number: ${issue_number}`);
 
                     const owner=context.repo.owner;
                     const repo=context.repo.repo;
@@ -28,7 +28,7 @@ jobs:
 
                     //create comment
                     const comment=await github.rest.issues.createComment({
-                    repo, owner, issue_number, body: {body: "Thanks for your contribution!"});
+                    repo, owner, issue_number, body: "Thanks for your contribution!"});
 
                     console.log(`comment id: ${comment.data.id}`);
                     console.log(comment.data);
