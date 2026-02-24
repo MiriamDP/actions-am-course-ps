@@ -3,7 +3,7 @@ name: upper-build
 on:
     push:
         paths:
-            - "./github/workflows/upper-build.yml"
+            - ".github/workflows/upper-build.yml"
             - "upper/**"
     workflow_dispatch:
 
@@ -11,6 +11,9 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
+            - run: pwd && ls -al
+            - uses: actions/checkout@v4
+            - run: pwd && ls -al
             - run: go version
             - uses: actions/setup-go@v5
               with:
