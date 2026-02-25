@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
+echo "::group::Testing..."
 go test -v
+echo "::endgroup::"
 
 APP_NAME=upper
 OUTPUT_DIR=bin
@@ -18,8 +20,15 @@ do
     if [$GOOS="windows"]; then
     output_name+='.exe'
     fi
+    echo "::group::Building $output_name..."
     go clean
     env GOOS=$GOOS GOARCG=$GOARCH go build -x -o $output_name .
+    echo "::endgroup::"
+
 done
 
+echo "::group::tree..."
+
 tree
+    echo "::endgroup::"
+
