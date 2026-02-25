@@ -28,6 +28,6 @@ jobs:
             - run: go test -v
             - uses: actions/upload-artifact@v4
               with:
-                path: ./upper/upper
+                path: ./upper/upper* #para que corra en windows se reuqier la extension
                 name: "build-${{matrix.os}}"
 
