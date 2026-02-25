@@ -9,7 +9,10 @@ on:
 
 jobs:
     capture:
-        runs-on: macos-latest
+        strategy:
+            matrix:
+                os: [ubuntu-latest, windows-latest, macos-latest] # se ejecuta en todos los so
+        runs-on: ${{matrix.os}}
         defaults:
             run:
                 working-directory: upper # con esto todos los steps se hacen en este directorio
@@ -23,3 +26,8 @@ jobs:
             - run: go build
             - run: ls
             - run: go test -v
+            - uses: actions/upload-artifact@v4
+              with:
+                path: ./upper/upper
+                name: "build-${{matrix.os}}"
+
